@@ -1,0 +1,6 @@
+rootProject.name = 'example-multi-module'
+
+include 'api'
+include 'domain'
+include 'client'
+
