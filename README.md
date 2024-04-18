@@ -15,7 +15,7 @@ root
 ├─ build.gradle.kts
 └─ settings.gradle.kts
 ```
-## 각 모듈 설명
+## 모듈 설명
 ### clients: 외부 API 호출 관리
 - 기능: 외부 API와의 통신을 담당합니다.
 - 특징:
@@ -36,6 +36,60 @@ root
   - api 모듈은 시스템의 다른 모듈들과의 연결점 역할을 하며, 사용자 인터페이스와 비즈니스 로직 사이의 중개자 역할을 수행합니다.
   - 이 모듈은 다양한 클라이언트 요청을 받아 적절한 서비스 로직을 호출하고, 그 결과를 사용자에게 전달하는 역할을 합니다.
 * * *
+## 주요 고민 사항
+### Clients
+```
+example-multi-module
+├─ client
+│	├─ weather
+│	│	├─ dto
+│	│	│	├─ request
+│	│	│	└─ response
+│	│	└─ WeatherApiClient
+│	├─ ...
+│	└─ support
+│	│	├─ ...
+│	│	└─ ClientResponse
+```
+> 외부 API의 변화 가능성을 어떻게 대처할 것인가?
+
+외부 API의 변화는 개발자가 제어할 수 없다. 이 부분에 대해 통일성 있게 다루고 대처하는 것이 중요하다고 판단했다. Client라는 모듈 내부에서 **외부 api 변화를 모두 책임지고 제어 및 추적하는 것을 목표**료 했다.
+
+1. 외부 api의 변화를 어떻게 알까?
+   현재 적용중인 날씨api의 response 형식은 아래와 같다.
+```
+{
+    "response": {
+        "header": {
+            "resultCode": "00",
+            "resultMsg": "NORMAL_SERVICE"
+        },
+        "body": {
+            "dataType": "JSON",
+            "items": {
+                "item": [
+                    {
+                        "baseDate": "20240417",
+                        "baseTime": "0500",
+                        "category": "TMP",
+                        "fcstDate": "20240417",
+                        "fcstTime": "0600",
+                        "fcstValue": "8",
+                        "nx": 62,
+                        "ny": 130
+                    }
+                ]
+            },
+            "pageNo": 1,
+            "numOfRows": 1,
+            "totalCount": 809
+        }
+    }
+}
+```   
+여기서 사용되는 데이터는 item내부만 사용된다. 이 api의 변화를 어떻게 추적해야 할까?
+
+
 # 주요 고민사항
 - API에서 가져오는 데이터를 DB에 어떻게 저장하면 좋을까?
    - 객체중심 VS DB 중심
