@@ -45,24 +45,6 @@ root
    - Client 모듈(외부 API 호출 담당)을 어떻게 설계 방법
 - 서비스 영역은 어디에 위치해야 하는가?
 - 기능 요구 사항이 명확하지 않을때, 어떤 방식으로 확장성을 고려할 수 있을까?
-### Clients
-```
-example-multi-module
-├─ client
-│	├─ weather
-│	│	├─ dto
-│	│	│	├─ request
-│	│	│	└─ response
-│	│	└─ WeatherApiClient
-│	├─ ...
-│	└─ support
-│	│	├─ ...
-│	│	└─ ClientResponse
-```
-> 외부 API의 변화 가능성을 어떻게 대처할 것인가?
-
-외부 API의 변화는 개발자가 제어할 수 없다. 이 부분에 대해 통일성 있게 다루고 대처하는 것이 중요하다고 판단했다. Client라는 모듈 내부에서 **외부 api 변화를 모두 책임지고 제어 및 추적하는 것을 목표**료 했다.
-
 * *  *
 # 학습 내용
 - [[멀티모듈] 우아한 멀티모듈 정리(by. 권용근) #1. 멀티모듈이란?](https://velog.io/@bienlee/%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88-%EC%9A%B0%EC%95%84%ED%95%9C-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88-%EC%A0%95%EB%A6%ACby.-%EA%B6%8C%EC%9A%A9%EA%B7%BC-1.-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88%EC%9D%B4%EB%9E%80)
