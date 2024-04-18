@@ -55,40 +55,6 @@ example-multi-module
 
 외부 API의 변화는 개발자가 제어할 수 없다. 이 부분에 대해 통일성 있게 다루고 대처하는 것이 중요하다고 판단했다. Client라는 모듈 내부에서 **외부 api 변화를 모두 책임지고 제어 및 추적하는 것을 목표**료 했다.
 
-1. 외부 api의 변화를 어떻게 알까?
-   현재 적용중인 날씨api의 response 형식은 아래와 같다.
-```
-{
-    "response": {
-        "header": {
-            "resultCode": "00",
-            "resultMsg": "NORMAL_SERVICE"
-        },
-        "body": {
-            "dataType": "JSON",
-            "items": {
-                "item": [
-                    {
-                        "baseDate": "20240417",
-                        "baseTime": "0500",
-                        "category": "TMP",
-                        "fcstDate": "20240417",
-                        "fcstTime": "0600",
-                        "fcstValue": "8",
-                        "nx": 62,
-                        "ny": 130
-                    }
-                ]
-            },
-            "pageNo": 1,
-            "numOfRows": 1,
-            "totalCount": 809
-        }
-    }
-}
-```   
-여기서 사용되는 데이터는 item내부만 사용된다. 이 api의 변화를 어떻게 추적해야 할까?
-
 * *  *
 # 학습 내용
 - [[멀티모듈] 우아한 멀티모듈 정리(by. 권용근) #1. 멀티모듈이란?](https://velog.io/@bienlee/%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88-%EC%9A%B0%EC%95%84%ED%95%9C-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88-%EC%A0%95%EB%A6%ACby.-%EA%B6%8C%EC%9A%A9%EA%B7%BC-1.-%EB%A9%80%ED%8B%B0%EB%AA%A8%EB%93%88%EC%9D%B4%EB%9E%80)
